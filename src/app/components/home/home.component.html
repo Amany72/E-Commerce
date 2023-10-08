@@ -1,0 +1,97 @@
+<section class="my-4  py-5">
+<div class="row g-0  justify-content-center" >
+<div class="col-md-2 ">
+  <owl-carousel-o [options]="staticSliderOptions">
+    <ng-template carouselSlide>
+       <img height="320px" src="assets/images/41nN4nvKaAL._AC_SY200_ (1).jpg" alt="slide1">
+    </ng-template>
+
+     <ng-template carouselSlide>
+    <img height="320px" src="assets/images/61cSNgtEISL._AC_SY200_ (2).jpg" alt="slide2">
+ </ng-template>
+
+    <ng-template carouselSlide>
+      <img height="320px"  src="assets/images/XCM_Manual_1396328_4379574_Egypt_EG_BAU_GW_DC_SL_Jewelry_379x304_1X._SY304_CB650636675_.jpg" alt="slide3">
+   </ng-template>
+
+
+
+  </owl-carousel-o>
+
+</div>
+<div class="col-md-2 ">
+<img class="w-100" src="assets/images/XCM_Manual_1396328_4379575_Egypt_EG_BAU_GW_DC_SL_Bags_Wallets_379x304_1X._SY304_CB650636675_.jpg" alt="Static slide 1">
+<img  class="w-100" src="assets/images/XCM_Manual_1533480_5305769_379x304_1X._SY304_CB616236518_.jpg" alt="Static slide 2">
+</div>
+
+</div>
+
+
+</section>
+
+
+
+
+<section *ngIf=" categories.length >0" class="my-4 " >
+<h2 class="text text-center my-4 fw-bolder fs-1">Our Popular Categories</h2>
+
+<owl-carousel-o [options]=" categorieOptions ">
+
+  <ng-container *ngFor="let categoryy of categories">
+    <ng-template carouselSlide >
+      <img height="310px" [src]="categoryy.image" [alt]="categoryy.name" [title]="categoryy.name ">
+      <h3 class="text h6">{{categoryy.name}}</h3>
+    </ng-template>
+  </ng-container>
+
+</owl-carousel-o>
+
+</section>
+
+
+
+
+<section class="overflow-hidden" *ngIf="products.length > 0">
+<h2 class="fw-bold text-center fs-1 my-4 text">Our Popular Products</h2>
+<input type="text" class="w-50 mx-auto form-control my-5 " placeholder="search..." [(ngModel)]="term" >
+
+<div class="row g-5 ">
+ <div *ngFor="let product of products | search :term | slice : 0 :18" class=" col-sm-6 col-md-4 col-lg-3 col-xl-2">
+
+
+
+  <div class="product h-100">
+<i class="fas fa-heart fs-2 heart"></i>
+
+<header [routerLink]="['/productdetails',product._id]"  role="button">
+  <img [src]="product.imageCover"  class="w-100" [alt]="product.title" [title]="product.title">
+<h3 class="small">{{product.title | textCut:3}}</h3>
+<h4 class="h6 text fw-bolder">{{product.category.name}}</h4>
+
+<div class="d-flex small align-items-center justify-content-between">
+  <span> {{product.price  | currency:'  EGP'}} </span>
+  <span class="py-2 mb-0"><i class="fas fa-star rating-color"></i>
+{{product.ratingsAverage}}
+
+  </span>
+
+
+</div>
+</header>
+<footer>
+  <button (click)="addProduct(product._id , addBtn )"
+   #addBtn class="main-btn my-0 py-2    w-100">
+    <i class="fa-solid fa-circle-plus " style="color: #ffffff;"></i>
+     Add To Cart</button>
+</footer>
+
+  </div>
+
+ </div>
+
+
+</div>
+
+
+
+</section>

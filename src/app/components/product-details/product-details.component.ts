@@ -1,0 +1,87 @@
+import { Component, OnInit, Renderer2 } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { ProductsService } from 'src/app/core/services/products.service';
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { CartService } from 'src/app/core/services/cart.service';
+import { ToastrService } from 'ngx-toastr';
+
+@Component({
+  selector: 'app-product-details',
+  standalone: true,
+  imports: [CommonModule , CarouselModule],
+  templateUrl: './product-details.component.html',
+  styleUrls: ['./product-details.component.scss']
+})
+export class ProductDetailsComponent implements OnInit {
+constructor(private _ActivatedRoute:ActivatedRoute , private _ProductsService:ProductsService , private _Renderer2:Renderer2 , private _CartService:CartService , private _ToastrService:ToastrService){}
+
+
+
+productId!:string|null;
+details:any=null;
+
+ngOnInit(): void {
+    this._ActivatedRoute.paramMap.subscribe({
+
+
+      next:(params)=>{
+      this.productId=  params.get('id');
+      console.log(this.productId);
+      }
+
+
+    });
+
+    this._ProductsService.getProductDetails(this.productId).subscribe({
+next:({data})=>{
+
+
+  console.log(data);
+this.details=data;
+}
+
+    })
+}
+
+addProduct(id:any , element:HTMLButtonElement):void{
+  //disabled Button
+  this._Renderer2.setAttribute(element , 'disabled' , 'true');
+
+  //Adding to cart
+    this._CartService.addToCart(id).subscribe({
+
+      next:(response)=>{
+           // console.log(response.message);
+
+           // console.log(response);
+        this._ToastrService.success(response.message);
+
+  // to enable button after adding
+        this._Renderer2.removeAttribute(element , 'disabled');
+
+        this._CartService.cartNumber.next(response.numOfCartItems);
+
+      },
+      error:()=>{
+        this._Renderer2.removeAttribute(element , 'disabled');
+
+
+      }
+    });
+
+  }
+
+detailsOptions: OwlOptions = {
+  loop: true,
+  mouseDrag: true,
+  touchDrag: true,
+  pullDrag: false,
+  dots: false,
+  navSpeed: 700,
+  navText: ['', ''],
+  items:1,
+  nav: true
+}
+
+}

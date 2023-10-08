@@ -1,0 +1,71 @@
+<nav #navScroll class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+    <a class="navbar-brand me-3" href="#"> <span><i class="fa-solid fa-cart-shopping pe-3" style="color: #0aad0a;"></i></span> Fresh Cart</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav m-auto mt-2 mt-lg-0 ">
+
+        <li class="nav-item me-2">
+          <a class="nav-link" routerLinkActive="active-link" routerLink="/home">Home</a>
+        </li>
+
+        <li class="nav-item me-2">
+          <a class="nav-link" routerLinkActive="active-link" routerLink="/cart">Cart</a>
+        </li>
+
+        <li class="nav-item me-2">
+          <a class="nav-link" routerLinkActive="active-link" routerLink="/wishList">Wish List</a>
+        </li>
+
+        <li class="nav-item me-2">
+          <a class="nav-link" routerLinkActive="active-link" routerLink="/products">Products</a>
+        </li>
+
+        <li class="nav-item me-2">
+          <a class="nav-link" routerLinkActive="active-link" routerLink="/categories">Categories</a>
+        </li>
+
+       
+
+
+      </ul>
+
+
+
+      <ul class="navbar-nav ms-auto mt-2  mt-lg-0 align-items-center">
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-user fs-3"></i>
+          </a>
+          <ul class="dropdown-menu" >
+            <li routerLinkActive="active-link" routerLink="/forgotpassword" role="button"><a class="dropdown-item" >Forgot Password</a></li>
+
+          </ul>
+        </li>
+
+<li class="nav-item">
+  <a class="nav-link position-relative" routerLink="/cart">
+<i class="fas fa-cart-shopping fs-2 mx-4 "></i>
+<span class="badge mx-4 bg-success position-absolute end-0 top-0">   {{changeCartNum}} </span>
+
+  </a>
+
+</li>
+
+
+        <li class="nav-item me-1">
+          <span role="button" (click)="logOut()" class="pe-5 py-5 fw-bolder mt-5"> <span class="text-danger">Log Out</span></span>
+        </li>
+
+
+
+
+      </ul>
+
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,29 @@
+.product{
+  overflow: hidden;
+  position: relative;
+
+
+  .heart{
+position: absolute;
+top: 5px ;
+right: 5px;
+z-index: 99;
+cursor: pointer;
+}
+
+  .main-btn{
+     transform: translateY(185%);
+     opacity: 0;
+     transition: 0.7s all;
+
+  }
+
+  &:hover{
+    .main-btn{
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+
